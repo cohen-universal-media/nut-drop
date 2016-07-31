@@ -10,10 +10,10 @@ window.NutDrop.state.demo = {
     gyroDebug : {},
     // function to scale up the game to full screen
     goFullScreen: function(){
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.setScreenSize(true);
+        // this.game.scale.pageAlignHorizontally = true;
+        // this.game.scale.pageAlignVertically = true;
+        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // this.game.scale.setScreenSize(true);
     },
     player : {},
     // function to be called when the game has been created
@@ -36,14 +36,14 @@ window.NutDrop.state.demo = {
         player.animations.add('walk2');
 
         player.animations.play('walk', 2, true);
-    // setting gyroscope update frequency
-    gyro.frequency = 10;
-    // start gyroscope detection
-    gyro.startTracking(function(o) {
-        // updating player velocity
-        player.body.velocity.x += o.gamma/40;
-        player.body.velocity.y += o.beta/40;
-    });
+    // // setting gyroscope update frequency
+    // gyro.frequency = 10;
+    // // start gyroscope detection
+    // gyro.startTracking(function(o) {
+    //     // updating player velocity
+    //     player.body.velocity.x += o.gamma/40;
+    //     player.body.velocity.y += o.beta/40;
+    // });
 },
 	update: function() {
 
@@ -97,7 +97,7 @@ render: function() {
 
     //  This will emit a quantity of 5 particles every 500ms. Each particle will live for 2000ms.
     //  The -1 means "run forever"
-    this.emitter.flow(2000, 500, 5, -1);
+   // this.emitter.flow(2000, 500, 5, -1);
 
     //  This will emit a single particle every 100ms. Each particle will live for 2000ms.
     //  The 100 means it will emit 100 particles in total and then stop.

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<title>Nut Drop</title>
 	
 	<!--<link rel="stylesheet" type="text/css" href="fonts/fonts.css" />-->
@@ -9,9 +10,12 @@
 <!-- 	<link rel="icon" href="assets/launcher.png" type="image/png" /> -->
 	<link rel="icon" href="assets/img/squirrel2.png" type="image/png" />
 	<link rel="manifest" href="manifest.json" />
-	
+
+	<script type="text/javascript" src="js/lib/fulltilt.js"></script>
 	<script type="text/javascript" src="js/lib/phaser.min.js"></script>
-	<script type="text/javascript" src="js/lib/gyro.js"></script>
+
+	<!--<script type="text/javascript" src="js/lib/gyro.js"></script>-->
+
 	<script type="text/javascript" src="js/lib/mt.helper.js"></script>
 	<script type="text/javascript" src="js/lib/mt.data.js"></script>
 	
@@ -30,5 +34,9 @@
 		// o.alpha, o.beta, o.gamma for gyro
 	});
 </script>
+<div id="menu" style="display:fixed;width:100%;bottom:20px;margin:0 auto;text-align:center;">
+	<button onclick="alert('Coming soon')" style="width:30%;display:inline-block;margin:20px;padding:20px;border-radius:3px">start</button>
+<button onclick="window.open('ft.html')" style="width:30%;display:inline-block;margin:20px;padding:20px;border-radius:3px">settings</button>
+</div>
 	</body>
 </html>
