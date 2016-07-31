@@ -8,6 +8,39 @@ var squirrelImage;
 window.NutDrop.state.demo = {
 	s: {},
     gyroDebug : {},
+    // function to scale up the game to full screen
+    goFullScreen: function(){
+        game.scale.pageAlignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.setScreenSize(true);
+    },
+    player : {},
+    // function to be called when the game has been created
+    onCreate: function() {
+    // initializing physics system
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    // going full screen
+    this.goFullScreen();
+    // adding the player on stage
+    this.player = this.game.add.sprite(160,240,"squirrel");
+    // setting player anchor point
+    this.player.anchor.setTo(0.5);
+    // enabling physics car.body.collideWorldBounds = true;
+    this.game.physics.enable(player, Phaser.Physics.ARCADE);
+    // the player will collide with bounds
+    this.player.body.collideWorldBounds = true;
+    // setting player bounce
+    this.player.body.bounce.set(0.8);
+    // setting gyroscope update frequency
+    gyro.frequency = 10;
+    // start gyroscope detection
+    gyro.startTracking(function(o) {
+        // updating player velocity
+        this.player.body.velocity.x += o.gamma/20;
+        this.player.body.velocity.y += o.beta/20;
+    });
+},
 	update: function() {
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
@@ -31,8 +64,7 @@ window.NutDrop.state.demo = {
 },
 
 render: function() {
-    var tO = gyro.getOrientation();
-    console.info(tO);
+
    this.game.debug.spriteInfo(this.s, 20, 32);
 
 },
