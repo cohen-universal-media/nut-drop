@@ -116,9 +116,9 @@ render: function() {
 
      this.s.animations.play('walk', 2, true);
 
-        this.player.animations.add('walk');
+        player.animations.add('walk');
 
-        this.player.animations.play('walk', 2, true);
+        player.animations.play('walk', 2, true);
 		
 		
 		
