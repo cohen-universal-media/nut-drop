@@ -177,6 +177,9 @@
                 var pxToMoveX = Math.max(box.minBoundX, Math.min(pxOffsetX + halfScreenWidth - halfCubeWidth, box.maxBoundX));
                 var pxToMoveY = Math.max(box.minBoundY, Math.min(pxOffsetY + halfScreenHeight - halfCubeWidth, box.maxBoundY));
 
+                pxToMoveX *= 0.1;
+                pxToMoveY *= 0.1;
+
                 box.style[transformCSSPropName] = 'translate3d(' + pxToMoveX + 'px, ' + pxToMoveY + 'px, 0)';
 
             });
