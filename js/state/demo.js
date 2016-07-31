@@ -37,54 +37,54 @@ window.NutDrop.state.demo = {
 
         player.animations.play('walk', 2, true);
 
-        var promise = FULLTILT.getDeviceOrientation({'type': 'game'});
-
-        promise.then(function(orientationControl) {
-
-            orientationControl.listen(function() {
-
-                    var euler;
-
-                    switch( currentControlType ) {
-                        case 1: // Use raw DeviceOrientation event values
-                            euler = orientationControl.getLastRawEventData();
-                            break;
-                        default: // Use Full Tilt values
-                            euler = orientationControl.getScreenAdjustedEuler();
-                            break;
-                    }
-
-                    // Don't update CSS position if we are close to encountering gimbal lock
-                    if (euler.beta > 85 && euler.beta < 95) {
-                        return;
-                    }
-
-                    var tiltX = euler.gamma;
-
-                    if (tiltX > 0) {
-                        tiltX = Math.min(tiltX, TILT_LIMIT);
-                    } else {
-                        tiltX = Math.max(tiltX, TILT_LIMIT * -1);
-                    }
-
-                    var pxOffsetX = (tiltX * halfScreenWidth) / TILT_LIMIT;
-
-                    if ( !initialBeta ) {
-                        initialBeta = euler.beta;
-                    }
-
-                    var tiltY = euler.beta - initialBeta;
-
-                    if (tiltY > 0) {
-                        tiltY = Math.min(tiltY, TILT_LIMIT);
-                    } else {
-                        tiltY = Math.max(tiltY, TILT_LIMIT * -1);
-                    }
-
-                    var pxOffsetY = (tiltY * halfScreenHeight) / TILT_LIMIT;
-
-                    var pxToMoveX = Math.max(box.minBoundX, Math.min(pxOffsetX + halfScreenWidth - halfCubeWidth, box.maxBoundX));
-                    var pxToMoveY = Math.max(box.minBoundY, Math.min(pxOffsetY + halfScreenHeight - halfCubeWidth, box.maxBoundY));
+        // var promise = FULLTILT.getDeviceOrientation({'type': 'game'});
+        //
+        // promise.then(function(orientationControl) {
+        //
+        //     orientationControl.listen(function() {
+        //
+        //             var euler;
+        //
+        //             switch( currentControlType ) {
+        //                 case 1: // Use raw DeviceOrientation event values
+        //                     euler = orientationControl.getLastRawEventData();
+        //                     break;
+        //                 default: // Use Full Tilt values
+        //                     euler = orientationControl.getScreenAdjustedEuler();
+        //                     break;
+        //             }
+        //
+        //             // Don't update CSS position if we are close to encountering gimbal lock
+        //             if (euler.beta > 85 && euler.beta < 95) {
+        //                 return;
+        //             }
+        //
+        //             var tiltX = euler.gamma;
+        //
+        //             if (tiltX > 0) {
+        //                 tiltX = Math.min(tiltX, TILT_LIMIT);
+        //             } else {
+        //                 tiltX = Math.max(tiltX, TILT_LIMIT * -1);
+        //             }
+        //
+        //             var pxOffsetX = (tiltX * halfScreenWidth) / TILT_LIMIT;
+        //
+        //             if ( !initialBeta ) {
+        //                 initialBeta = euler.beta;
+        //             }
+        //
+        //             var tiltY = euler.beta - initialBeta;
+        //
+        //             if (tiltY > 0) {
+        //                 tiltY = Math.min(tiltY, TILT_LIMIT);
+        //             } else {
+        //                 tiltY = Math.max(tiltY, TILT_LIMIT * -1);
+        //             }
+        //
+        //             var pxOffsetY = (tiltY * halfScreenHeight) / TILT_LIMIT;
+        //
+        //             var pxToMoveX = Math.max(box.minBoundX, Math.min(pxOffsetX + halfScreenWidth - halfCubeWidth, box.maxBoundX));
+        //             var pxToMoveY = Math.max(box.minBoundY, Math.min(pxOffsetY + halfScreenHeight - halfCubeWidth, box.maxBoundY));
 
                     // // setting gyroscope update frequency
     // gyro.frequency = 10;
