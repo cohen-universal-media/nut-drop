@@ -11,6 +11,7 @@
 	<link rel="manifest" href="manifest.json" />
 	
 	<script type="text/javascript" src="js/lib/phaser.min.js"></script>
+	<script type="text/javascript" src="js/lib/gyro.js"></script>
 	<script type="text/javascript" src="js/lib/mt.helper.js"></script>
 	<script type="text/javascript" src="js/lib/mt.data.js"></script>
 	
@@ -23,6 +24,11 @@
 	<script type="text/javascript" src="js/state/demo.js"></script>
 </head>
 <body>
-	
+<script>
+	gyro.startTracking(function(o) {
+		// o.x, o.y, o.z for accelerometer
+		// o.alpha, o.beta, o.gamma for gyro
+	});
+</script>
 	</body>
 </html>

@@ -30,6 +30,7 @@ window.NutDrop.state.demo = {
 },
 
 render: function() {
+    this.s.gyro.orientation = gyro.getOrientation();
    this.game.debug.spriteInfo(this.s, 20, 32);
 
 },
