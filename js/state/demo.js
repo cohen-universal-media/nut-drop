@@ -123,7 +123,7 @@ render: function() {
 
 },
 	preload: function() {
-		  this.game.load.spritesheet('squirrel',  'assets/squirrel_color_front_2_frame_spritesheet_blur_opacity.png', 24, 24, 2);
+		  this.game.load.spritesheet('squirrel',  'assets/cw.png', 24, 24, 4);
 
     //  37x45 is the size of each frame
     //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
