@@ -159,7 +159,7 @@ render: function() {
 
         this.s.animations.add('walk');
 
-        this.s.animations.play('walk', 2, true);
+        this.s.animations.play('walk', 3, true);
 
 
      	 var style = { font: "32px Courier", fill: "#00ff44" };
