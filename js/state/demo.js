@@ -37,8 +37,8 @@ window.NutDrop.state.demo = {
     // start gyroscope detection
     gyro.startTracking(function(o) {
         // updating player velocity
-        player.body.velocity.x += o.gamma/20;
-        player.body.velocity.y += o.beta/20;
+        player.body.velocity.x += o.gamma/40;
+        player.body.velocity.y += o.beta/40;
     });
 },
 	update: function() {
@@ -115,6 +115,10 @@ render: function() {
      this.s.animations.add('walk');
 
      this.s.animations.play('walk', 2, true);
+
+        this.player.animations.add('walk');
+
+        this.player.animations.play('walk', 2, true);
 		
 		
 		
