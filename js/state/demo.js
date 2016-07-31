@@ -33,7 +33,7 @@ window.NutDrop.state.demo = {
     // setting player bounce
     player.body.bounce.set(0.8);
 
-        player.animations.add('walk');
+        player.animations.add('walk2');
 
         player.animations.play('walk', 2, true);
     // setting gyroscope update frequency
