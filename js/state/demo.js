@@ -10,10 +10,10 @@ window.NutDrop.state.demo = {
     gyroDebug : {},
     // function to scale up the game to full screen
     goFullScreen: function(){
-        // this.game.scale.pageAlignHorizontally = true;
-        // this.game.scale.pageAlignVertically = true;
-        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        // this.game.scale.setScreenSize(true);
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.scale.setScreenSize(true);
     },
     player : {},
     // function to be called when the game has been created
