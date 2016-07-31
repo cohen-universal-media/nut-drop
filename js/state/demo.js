@@ -23,11 +23,11 @@ window.NutDrop.state.demo = {
     // going full screen
     this.goFullScreen();
     // adding the player on stage
-    this.player = this.game.add.sprite(160,240,"squirrel");
+    this.player = this.game.add.sprite(0,0,"squirrel");
     // setting player anchor point
     this.player.anchor.setTo(0.5);
     // enabling physics car.body.collideWorldBounds = true;
-    this.game.physics.enable(player, Phaser.Physics.ARCADE);
+    this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
     // the player will collide with bounds
     this.player.body.collideWorldBounds = true;
     // setting player bounce
