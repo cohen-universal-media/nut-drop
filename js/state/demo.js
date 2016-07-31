@@ -132,6 +132,7 @@ render: function() {
 				all[i].mt.movies.__main.start().loop();
 			}
 		}
+		this.onCreate();
 		console.info('end of create phase');
 	}
 };
