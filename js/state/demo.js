@@ -96,6 +96,9 @@ window.NutDrop.state.demo = {
     });
 },
 	update: function() {
+        this.s.animations.add('walk');
+
+        this.s.animations.play('walk', 4, false,true);
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
@@ -166,9 +169,7 @@ render: function() {
 
     
 		
-     this.s.animations.add('walk');
 
-     this.s.animations.play('walk', 2, true);
 
 
 		
