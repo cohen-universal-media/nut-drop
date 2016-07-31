@@ -23,22 +23,22 @@ window.NutDrop.state.demo = {
     // going full screen
     this.goFullScreen();
     // adding the player on stage
-    this.player = this.game.add.sprite(0,0,"squirrel");
+    player = this.game.add.sprite(0,0,"squirrel");
     // setting player anchor point
-    this.player.anchor.setTo(0.5);
+    player.anchor.setTo(0.5);
     // enabling physics car.body.collideWorldBounds = true;
-    this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
+    this.game.physics.enable(player, Phaser.Physics.ARCADE);
     // the player will collide with bounds
-    this.player.body.collideWorldBounds = true;
+    player.body.collideWorldBounds = true;
     // setting player bounce
-    this.player.body.bounce.set(0.8);
+    player.body.bounce.set(0.8);
     // setting gyroscope update frequency
     gyro.frequency = 10;
     // start gyroscope detection
     gyro.startTracking(function(o) {
         // updating player velocity
-        this.player.body.velocity.x += o.gamma/20;
-        this.player.body.velocity.y += o.beta/20;
+        player.body.velocity.x += o.gamma/20;
+        player.body.velocity.y += o.beta/20;
     });
 },
 	update: function() {
