@@ -32,6 +32,10 @@ window.NutDrop.state.demo = {
     player.body.collideWorldBounds = true;
     // setting player bounce
     player.body.bounce.set(0.8);
+
+        player.animations.add('walk');
+
+        player.animations.play('walk', 2, true);
     // setting gyroscope update frequency
     gyro.frequency = 10;
     // start gyroscope detection
@@ -116,9 +120,7 @@ render: function() {
 
      this.s.animations.play('walk', 2, true);
 
-        player.animations.add('walk');
 
-        player.animations.play('walk', 2, true);
 		
 		
 		
