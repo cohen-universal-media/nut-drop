@@ -96,9 +96,7 @@ window.NutDrop.state.demo = {
     });
 },
 	update: function() {
-        this.s.animations.add('walk');
 
-        this.s.animations.play('walk', 4, false,true);
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
@@ -158,6 +156,12 @@ render: function() {
 		
 		this.s = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'squirrel');
 	//	sprite.scale = {x:20,y:20};
+
+        this.s.animations.add('walk');
+
+        this.s.animations.play('walk', 4, true);
+
+
      	 var style = { font: "32px Courier", fill: "#00ff44" };
 
     
@@ -167,8 +171,8 @@ render: function() {
     var text3 = this.game.add.text(mt.data.map.viewportWidth/4, 5*mt.data.map.viewportHeight/8, "Use arrow keys to ", style);
 		var text4 = this.game.add.text(mt.data.map.viewportWidth/4, 3*mt.data.map.viewportHeight/4, "move the squirrel", style);
 
-    
-		
+
+
 
 
 
