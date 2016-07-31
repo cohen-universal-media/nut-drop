@@ -102,20 +102,20 @@ window.NutDrop.state.demo = {
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
-        this.s.x -= 4;
+        this.s.x -= 1;
     }
     else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
     {
-        this.s.x += 4;
+        this.s.x += 1;
     }
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
     {
-        this.s.y -= 4;
+        this.s.y -= 1;
     }
     else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
     {
-        this.s.y += 4;
+        this.s.y += 1;
     }
 
 },
