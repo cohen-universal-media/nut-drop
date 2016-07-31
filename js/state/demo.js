@@ -7,6 +7,7 @@ var player;
 var squirrelImage;
 window.NutDrop.state.demo = {
 	s: {},
+    gyroDebug : {},
 	update: function() {
 
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
@@ -30,8 +31,8 @@ window.NutDrop.state.demo = {
 },
 
 render: function() {
-    this.s.gyro = {};
-    this.s.gyro.orientation = gyro.getOrientation();
+    var tO = gyro.getOrientation();
+    console.info(tO);
    this.game.debug.spriteInfo(this.s, 20, 32);
 
 },
