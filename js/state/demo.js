@@ -138,15 +138,15 @@ render: function() {
 		console.info('create phase of demo state');
 		// create all objects
 		
-		this.emitter = this.game.add.emitter(this.game.world.centerX, 0, 100);
-
-    this.emitter.makeParticles('squirrel');
-
-    this.emitter.minParticleSpeed.setTo(-300, 30);
-    this.emitter.maxParticleSpeed.setTo(300, 100);
-    this.emitter.minParticleScale = 0.1;
-    this.emitter.maxParticleScale = 0.5;
-    this.emitter.gravity = 250;
+		// this.emitter = this.game.add.emitter(this.game.world.centerX, 0, 100);
+    //
+    // this.emitter.makeParticles('squirrel');
+    //
+    // this.emitter.minParticleSpeed.setTo(-300, 30);
+    // this.emitter.maxParticleSpeed.setTo(300, 100);
+    // this.emitter.minParticleScale = 0.1;
+    // this.emitter.maxParticleScale = 0.5;
+    // this.emitter.gravity = 250;
 
     //  This will emit a quantity of 5 particles every 500ms. Each particle will live for 2000ms.
     //  The -1 means "run forever"
