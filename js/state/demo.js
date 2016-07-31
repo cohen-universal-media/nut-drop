@@ -87,13 +87,13 @@ window.NutDrop.state.demo = {
         //             var pxToMoveY = Math.max(box.minBoundY, Math.min(pxOffsetY + halfScreenHeight - halfCubeWidth, box.maxBoundY));
 
                     // // setting gyroscope update frequency
-    // gyro.frequency = 10;
-    // // start gyroscope detection
-    // gyro.startTracking(function(o) {
-    //     // updating player velocity
-    //     player.body.velocity.x += o.gamma/40;
-    //     player.body.velocity.y += o.beta/40;
-    // });
+    gyro.frequency = 10;
+    // start gyroscope detection
+    gyro.startTracking(function(o) {
+        // updating player velocity
+        player.body.velocity.x += o.gamma/40;
+        player.body.velocity.y += o.beta/40;
+    });
 },
 	update: function() {
 
