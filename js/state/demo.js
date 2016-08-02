@@ -97,8 +97,11 @@ window.NutDrop.state.demo = {
         // player.body.velocity.x += o.gamma/20;
         // player.body.velocity.y += o.beta/20;
         // console.log(o.gamma + ' ' + o.beta);
-        if(o.gamma !== null && o.beta !== null) {
-            that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 100, 5000);
+        if(o.gamma !== null && o.beta !== null && !this.hasStartedMoving) {
+            that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 1000);
+            this.hasStartedMoving = true;
+            this.lastKnownPosition.x = player.x;
+            this.lastKnownPosition.y = player.y;
         }
     });
 },
