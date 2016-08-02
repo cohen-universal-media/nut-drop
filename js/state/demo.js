@@ -10,18 +10,17 @@ window.NutDrop.state.demo = {
     gyroDebug : {},
     // function to scale up the game to full screen
     goFullScreen: function(){
-        // this.game.scale.pageAlignHorizontally = true;
-        // this.game.scale.pageAlignVertically = true;
-        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        // this.game.scale.setScreenSize(true);
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.scale.setScreenSize(true);
     },
     player : {},
     // function to be called when the game has been created
     onCreate: function() {
     // initializing physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    // going full screen
-    this.goFullScreen();
+
     // adding the player on stage
     player = this.game.add.sprite(0,0,"squirrel");
         player.scale.x = player.scale.y = 2;
@@ -91,12 +90,14 @@ window.NutDrop.state.demo = {
                     // // setting gyroscope update frequency
     gyro.frequency = 10;
     // start gyroscope detection
-        var that = this;
+       var gyroDebug = this.gyroDebug;
     gyro.startTracking(function(o) {
         // updating player velocity
         // player.body.velocity.x += o.gamma/20;
         // player.body.velocity.y += o.beta/20;
         // console.log(o.gamma + ' ' + o.beta);
+        gyroDebug.gamma = o.gamma;
+        gyroDebug.beta = o.beta;
         if(o.gamma !== null && o.beta !== null && !this.hasStartedMoving) {
            // that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 2);
             that.game.add.tween(player).to( { x:o.gamma/20,y: o.beta/20}, 3000, Phaser.Easing.Linear.None, true);
@@ -105,21 +106,25 @@ window.NutDrop.state.demo = {
             that.lastKnownPosition.y = player.y;
         }
     });
+
+        // ALWAYS GO FULLSCREEN LAST!!!
+        this.goFullScreen();
 },
     reachedLastPointerLocation: false,
     lastKnownPosition: {},
     hasStartedMoving: false,
 	update: function() {
 
-            if (this.game.input.activePointer.isDown) {
-                var touchX = this.game.input.activePointer.clientX;
-                var touchY = this.game.input.activePointer.clientY;
-                this.game.add.tween(player).to( { x:touchX,y: touchY }, 1000, Phaser.Easing.Linear.None, true);
-              //  var changeCoordinate = this.game.physics.arcade.moveToXY(player, touchX, touchY, 100, 5000);
-                // console.log(changeCoordinate);
-                this.lastKnownPosition = {x: player.x, y: player.y};
-                this.reachedLastPointerLocation = false;
-                this.hasStartedMoving = true;
+            if (this.game.input.activePointer.leftButton.isDown) {
+           //     this.goFullScreen();
+            //     var touchX = this.game.input.activePointer.clientX;
+            //     var touchY = this.game.input.activePointer.clientY;
+            //     this.game.add.tween(player).to( { x:touchX,y: touchY }, 1000, Phaser.Easing.Linear.None, true);
+            //   //  var changeCoordinate = this.game.physics.arcade.moveToXY(player, touchX, touchY, 100, 5000);
+            //     // console.log(changeCoordinate);
+            //     this.lastKnownPosition = {x: player.x, y: player.y};
+            //     this.reachedLastPointerLocation = false;
+            //     this.hasStartedMoving = true;
             }
 
 
@@ -142,10 +147,29 @@ window.NutDrop.state.demo = {
         }
 
 },
+    gofull: function() {
 
+    if (this.game.scale.isFullScreen)
+    {
+        this.game.scale.stopFullScreen();
+    }
+    else
+    {
+        this.game.scale.startFullScreen(false);
+    }
+
+},
 render: function() {
 
-   this.game.debug.spriteInfo(this.s, 20, 32);
+   this.game.debug.spriteInfo(this.s, 0, 128);
+
+    // game.debug.text('Click / Tap to go fullscreen', 270, 16);
+    this.game.debug.text('Click / Tap to go fullscreen | Move Player 2 with keyboard arrow keys', 0, 16);
+    this.game.debug.text('Nut Drop Copyright 2016 Cohen Creative', 0, 64);
+    this.game.debug.text('tilt gamma: ' + this.gyroDebug.gamma + ' beta: ' + this.gyroDebug.beta,0,96);
+
+    this.game.debug.inputInfo(0, 256);
+    // game.debug.pointer(game.input.activePointer);
 
 },
 	preload: function() {
@@ -196,10 +220,10 @@ render: function() {
 
     
 
-    var text1 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/4, "Nut Drop - coming soon", style);
-    var text2 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/2, "Cohen Creative", style);
-    var text3 = this.game.add.text(mt.data.map.viewportWidth/4, 5*mt.data.map.viewportHeight/8, "Use arrow keys to move the squirrel.", style);
-		var text4 = this.game.add.text(mt.data.map.viewportWidth/4, 3*mt.data.map.viewportHeight/4, "Touch and gyroscopic movement also supported.", style);
+    // var text1 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/4, "Nut Drop - coming soon", style);
+    // var text2 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/2, "Cohen Creative", style);
+    // var text3 = this.game.add.text(mt.data.map.viewportWidth/4, 5*mt.data.map.viewportHeight/8, "Use arrow keys to move the squirrel.", style);
+		// var text4 = this.game.add.text(mt.data.map.viewportWidth/4, 3*mt.data.map.viewportHeight/4, "Touch and gyroscopic movement also supported.", style);
 
 
 
@@ -223,6 +247,18 @@ render: function() {
 				all[i].mt.movies.__main.start().loop();
 			}
 		}
+
+        // Stretch to fill
+        this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
+        // Keep original size
+        // game.scale.fullScreenScaleMode = Phaser.ScaleManager.NO_SCALE;
+
+        // Maintain aspect ratio
+        // game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+        this.game.input.onDown.add(this.gofull, this);
+
 		this.onCreate();
 		console.info('end of create phase');
 	}

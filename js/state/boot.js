@@ -13,7 +13,7 @@ window.NutDrop.state.boot = {
 		mt.setBackgroundColor(true);
 		
 		// load assets for the Loading group ( if exists )
-		//mt.loadGroup("Loading");
+		mt.loadGroup("Loading");
 	},
 	create: function(){
 		// add all game states
