@@ -36,7 +36,7 @@ window.NutDrop.state.demo = {
 
         player.animations.add('walk2');
 
-        player.animations.play('walk2', 3, true);
+
 
         // var promise = FULLTILT.getDeviceOrientation({'type': 'game'});
         //
@@ -143,7 +143,10 @@ window.NutDrop.state.demo = {
         }
         else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
         {
+            this.s.animations.play('walk', 6, false);
+
             this.s.y += 1;
+
         }
 
 },
@@ -213,7 +216,7 @@ render: function() {
         this.s.scale.x = this.s.scale.y = 2;
         this.s.animations.add('walk');
 
-        this.s.animations.play('walk', 3, true);
+        // this.s.animations.play('walk', 3, true);
 
 
      	 var style = { font: "12px Courier", fill: "#00ff44" };
