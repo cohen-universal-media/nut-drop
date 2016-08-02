@@ -10,10 +10,10 @@ window.NutDrop.state.demo = {
     gyroDebug : {},
     // function to scale up the game to full screen
     goFullScreen: function(){
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.setScreenSize(true);
+        // this.game.scale.pageAlignHorizontally = true;
+        // this.game.scale.pageAlignVertically = true;
+        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        // this.game.scale.setScreenSize(true);
     },
     player : {},
     // function to be called when the game has been created
@@ -24,8 +24,10 @@ window.NutDrop.state.demo = {
     this.goFullScreen();
     // adding the player on stage
     player = this.game.add.sprite(0,0,"squirrel");
+        player.scale.x = player.scale.y = 2;
+        this.lastKnownPosition = {x:player.x, y:player.y};
     // setting player anchor point
-    player.anchor.setTo(0.5);
+   player.anchor.setTo(0.5);
     // enabling physics car.body.collideWorldBounds = true;
     this.game.physics.enable(player, Phaser.Physics.ARCADE);
     // the player will collide with bounds
@@ -35,7 +37,7 @@ window.NutDrop.state.demo = {
 
         player.animations.add('walk2');
 
-        player.animations.play('walk', 2, true);
+        player.animations.play('walk2', 3, true);
 
         // var promise = FULLTILT.getDeviceOrientation({'type': 'game'});
         //
@@ -89,32 +91,50 @@ window.NutDrop.state.demo = {
                     // // setting gyroscope update frequency
     gyro.frequency = 10;
     // start gyroscope detection
+        var that = this;
     gyro.startTracking(function(o) {
         // updating player velocity
-        player.body.velocity.x += o.gamma/40;
-        player.body.velocity.y += o.beta/40;
+        // player.body.velocity.x += o.gamma/20;
+        // player.body.velocity.y += o.beta/20;
+        // console.log(o.gamma + ' ' + o.beta);
+        if(o.gamma !== null && o.beta !== null) {
+            that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 100, 5000);
+        }
     });
 },
+    reachedLastPointerLocation: false,
+    lastKnownPosition: {},
+    hasStartedMoving: false,
 	update: function() {
 
+            if (this.game.input.activePointer.isDown) {
+                var touchX = this.game.input.activePointer.clientX;
+                var touchY = this.game.input.activePointer.clientY;
+                var changeCoordinate = this.game.physics.arcade.moveToXY(player, touchX, touchY, 100, 5000);
+                // console.log(changeCoordinate);
+                this.lastKnownPosition = {x: player.x, y: player.y};
+                this.reachedLastPointerLocation = false;
+                this.hasStartedMoving = true;
+            }
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
-    {
-        this.s.x -= 1;
-    }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
-    {
-        this.s.x += 1;
-    }
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
-    {
-        this.s.y -= 1;
-    }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
-    {
-        this.s.y += 1;
-    }
+        if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+        {
+            this.s.x -= 1;
+        }
+        else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+        {
+            this.s.x += 1;
+        }
+
+        if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
+        {
+            this.s.y -= 1;
+        }
+        else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
+        {
+            this.s.y += 1;
+        }
 
 },
 
@@ -134,6 +154,11 @@ render: function() {
 	emitter : {},
 	create: function(){
 		console.info('create phase of demo state');
+        if(typeof this.game.mouse !== 'undefined') {
+            if(typeof this.game.mouse.capture !== 'undefined') {
+                this.game.mouse.capture = true;
+            }
+        }
 		// create all objects
 		
 		// this.emitter = this.game.add.emitter(this.game.world.centerX, 0, 100);
@@ -156,20 +181,20 @@ render: function() {
 		
 		this.s = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'squirrel');
 	//	sprite.scale = {x:20,y:20};
-
+        this.s.scale.x = this.s.scale.y = 2;
         this.s.animations.add('walk');
 
         this.s.animations.play('walk', 3, true);
 
 
-     	 var style = { font: "32px Courier", fill: "#00ff44" };
+     	 var style = { font: "12px Courier", fill: "#00ff44" };
 
     
 
-    var text1 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/4, "Nut Drop", style);
-    var text2 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/2, "Coming Soon", style);
-    var text3 = this.game.add.text(mt.data.map.viewportWidth/4, 5*mt.data.map.viewportHeight/8, "Use arrow keys to ", style);
-		var text4 = this.game.add.text(mt.data.map.viewportWidth/4, 3*mt.data.map.viewportHeight/4, "move the squirrel", style);
+    var text1 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/4, "Nut Drop - coming soon", style);
+    var text2 = this.game.add.text(mt.data.map.viewportWidth/4, mt.data.map.viewportHeight/2, "Cohen Creative", style);
+    var text3 = this.game.add.text(mt.data.map.viewportWidth/4, 5*mt.data.map.viewportHeight/8, "Use arrow keys to move the squirrel.", style);
+		var text4 = this.game.add.text(mt.data.map.viewportWidth/4, 3*mt.data.map.viewportHeight/4, "Touch and gyroscopic movement also supported.", style);
 
 
 
