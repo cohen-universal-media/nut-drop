@@ -98,10 +98,11 @@ window.NutDrop.state.demo = {
         // player.body.velocity.y += o.beta/20;
         // console.log(o.gamma + ' ' + o.beta);
         if(o.gamma !== null && o.beta !== null && !this.hasStartedMoving) {
-            that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 1000);
-            this.hasStartedMoving = true;
-            this.lastKnownPosition.x = player.x;
-            this.lastKnownPosition.y = player.y;
+           // that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 2);
+            that.game.add.tween(player).to( { x:o.gamma/20,y: o.beta/20}, 3000, Phaser.Easing.Linear.None, true);
+            that.hasStartedMoving = true;
+            that.lastKnownPosition.x = player.x;
+            that.lastKnownPosition.y = player.y;
         }
     });
 },
@@ -113,7 +114,8 @@ window.NutDrop.state.demo = {
             if (this.game.input.activePointer.isDown) {
                 var touchX = this.game.input.activePointer.clientX;
                 var touchY = this.game.input.activePointer.clientY;
-                var changeCoordinate = this.game.physics.arcade.moveToXY(player, touchX, touchY, 100, 5000);
+                this.game.add.tween(player).to( { x:touchX,y: touchY }, 1000, Phaser.Easing.Linear.None, true);
+              //  var changeCoordinate = this.game.physics.arcade.moveToXY(player, touchX, touchY, 100, 5000);
                 // console.log(changeCoordinate);
                 this.lastKnownPosition = {x: player.x, y: player.y};
                 this.reachedLastPointerLocation = false;
