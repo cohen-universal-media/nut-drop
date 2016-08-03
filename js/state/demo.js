@@ -91,6 +91,7 @@ window.NutDrop.state.demo = {
     gyro.frequency = 10;
     // start gyroscope detection
        var gyroDebug = this.gyroDebug;
+        var that = this;
     gyro.startTracking(function(o) {
         // updating player velocity
         // player.body.velocity.x += o.gamma/20;
@@ -100,6 +101,7 @@ window.NutDrop.state.demo = {
         gyroDebug.beta = o.beta;
         if(o.gamma !== null && o.beta !== null && !this.hasStartedMoving) {
            // that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 2);
+            player.animations.play('walk2', 6, false);
             that.game.add.tween(player).to( { x:o.gamma/20,y: o.beta/20}, 3000, Phaser.Easing.Linear.None, true);
             that.hasStartedMoving = true;
             that.lastKnownPosition.x = player.x;
@@ -130,15 +132,18 @@ window.NutDrop.state.demo = {
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
         {
+            this.s.animations.play('walk', 6, false);
             this.s.x -= 1;
         }
         else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
         {
+            this.s.animations.play('walk', 6, false);
             this.s.x += 1;
         }
 
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
         {
+            this.s.animations.play('walk', 6, false);
             this.s.y -= 1;
         }
         else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
@@ -177,7 +182,7 @@ render: function() {
 },
 	preload: function() {
 		  this.game.load.spritesheet('squirrel',  'assets/spritesheets/cw.png', 24, 24, 4);
-
+            this.game.load.image('background', 'assets/img/grass.png');
     //  37x45 is the size of each frame
     //  There are 18 frames in the PNG - you can leave this value blank if the frames fill up the entire PNG, but in this case there are some
     //  blank frames at the end, so we tell the loader how many to load
@@ -210,7 +215,7 @@ render: function() {
     //  This will emit a single particle every 100ms. Each particle will live for 2000ms.
     //  The 100 means it will emit 100 particles in total and then stop.
     // emitter.flow(2000, 100, 1, 100);
-		
+		this.game.add.tileSprite(0,0,mt.data.map.viewportWidth,mt.data.map.viewportHeight,'background');
 		this.s = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'squirrel');
 	//	sprite.scale = {x:20,y:20};
         this.s.scale.x = this.s.scale.y = 2;

@@ -124,6 +124,6 @@ window.mt = window.mt || {}; window.mt.data = {
 		"gridOffsetX": 0,
 		"gridOffsetY": 0,
 		"showGrid": 1,
-		"backgroundColor": "#222222"
+		"backgroundColor": "#065d4e"
 	}
 };
