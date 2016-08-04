@@ -102,7 +102,10 @@ window.NutDrop.state.demo = {
         if(o.gamma !== null && o.beta !== null && !this.hasStartedMoving) {
            // that.game.physics.arcade.moveToXY(player,o.gamma/20,o.beta/20, 50, 2);
             player.animations.play('walk2', 6, false);
-            that.game.add.tween(player).to( { x:o.gamma/20,y: o.beta/20}, 3000, Phaser.Easing.Linear.None, true);
+            that.playerTween = that.game.add.tween(player).to( { x:o.gamma/20,y: o.beta/20}, 3000, Phaser.Easing.Linear.None, true);
+
+
+            that.playerTween.onComplete.add(that.playerTweenOnComplete, this);
             that.hasStartedMoving = true;
             that.lastKnownPosition.x = player.x;
             that.lastKnownPosition.y = player.y;
@@ -112,11 +115,21 @@ window.NutDrop.state.demo = {
         // ALWAYS GO FULLSCREEN LAST!!!
         this.goFullScreen();
 },
+    playerTweenOnComplete: function() {
+    this.hasStartedMoving = false;
+},
     reachedLastPointerLocation: false,
     lastKnownPosition: {},
+    playerTween : {},
     hasStartedMoving: false,
 	update: function() {
 
+            var gyroCoords = gyro.getOrientation();
+        // console.log(gyroCoords);
+        if(!this.hasStartedMoving) {
+            this.playerTween = this.game.add.tween(player).to( { x:gyroCoords.gamma/20,y: gyroCoords.beta/20}, 3000, Phaser.Easing.Linear.None, true);
+            this.playerTween.onComplete.add(this.playerTweenOnComplete, this);
+        }
             if (this.game.input.activePointer.leftButton.isDown) {
            //     this.goFullScreen();
             //     var touchX = this.game.input.activePointer.clientX;
@@ -190,7 +203,7 @@ render: function() {
 	},
 	emitter : {},
 	create: function(){
-		console.info('create phase of demo state');
+		// console.info('create phase of demo state');
         if(typeof this.game.mouse !== 'undefined') {
             if(typeof this.game.mouse.capture !== 'undefined') {
                 this.game.mouse.capture = true;
@@ -242,7 +255,7 @@ render: function() {
 		
 		
 		var all = mt.createAll();
-		console.log(all);
+		// console.log(all);
 		
 		
 		
@@ -268,6 +281,6 @@ render: function() {
         this.game.input.onDown.add(this.gofull, this);
 
 		this.onCreate();
-		console.info('end of create phase');
+		// console.info('end of create phase');
 	}
 };
