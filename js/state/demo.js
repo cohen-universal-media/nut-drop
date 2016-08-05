@@ -23,7 +23,8 @@ window.NutDrop.state.demo = {
 
     // adding the player on stage
     player = this.game.add.sprite(0,0,"squirrel");
-        player.scale.x = player.scale.y = 2;
+
+      //  player.scale.x = player.scale.y = 2;
         this.lastKnownPosition = {x:player.x, y:player.y};
     // setting player anchor point
    player.anchor.setTo(0.5);
@@ -231,7 +232,7 @@ render: function() {
 		this.game.add.tileSprite(0,0,mt.data.map.viewportWidth,mt.data.map.viewportHeight,'background');
 		this.s = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'squirrel');
 	//	sprite.scale = {x:20,y:20};
-        this.s.scale.x = this.s.scale.y = 2;
+        //this.s.scale.x = this.s.scale.y = 2;
         this.s.animations.add('walk');
 
         // this.s.animations.play('walk', 3, true);

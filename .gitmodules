@@ -1,0 +1,6 @@
+[submodule "phaser"]
+	path = phaser
+	url = https://github.com/photonstorm/phaser
+[submodule "react"]
+	path = react
+	url = https://github.com/cohen-universal-media/react
