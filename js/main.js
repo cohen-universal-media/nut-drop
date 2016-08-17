@@ -15,5 +15,5 @@ window.NutDrop = {
 };
 
 window.addEventListener('DOMContentLoaded', function(){
-	window.NutDrop.main();
+	// window.NutDrop.main();
 }, false);
